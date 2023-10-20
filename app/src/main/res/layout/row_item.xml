@@ -18,9 +18,10 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/contact_img"
+            app:cardCornerRadius="50dp"
+            app:cardBackgroundColor="@color/light_grey"
             android:padding="5dp"
-            android:background="@color/dark_grey"
-            app:cardElevation="5dp"
+            android:background="@color/grey"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
@@ -59,7 +60,6 @@
             android:id="@+id/call"
             android:padding="5dp"
             android:background="@color/dark_grey"
-            app:cardElevation="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/grey"
     android:orientation="vertical"
     app:layout_insetEdge="top"
     app:layout_marginBaseline="2dp"
@@ -40,6 +40,7 @@
             android:gravity="center_vertical"
             android:layout_marginStart="10dp"
             android:text="Hi Name!"
+            android:textColor="@color/white"
             android:letterSpacing="0.01"
             android:textSize="20sp"
             android:textAlignment="gravity" />
@@ -74,7 +75,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="20dp"
             android:gravity="center_vertical"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:text="Missed Calls"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -88,28 +89,30 @@
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_margin="10dp"
             android:id="@+id/itemsRecycler"
-            android:layout_marginBottom="?actionBarSize"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_marginTop="20dp">
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="?actionBarSize"
+            tools:listitem="@layout/row_item">
 
         </androidx.recyclerview.widget.RecyclerView>
 
         <com.google.android.material.bottomappbar.BottomAppBar
-            app:hideOnScroll="true"
             android:id="@+id/bottomAppBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            app:fabCradleMargin="10dp"
+            android:layout_marginBottom="0dp"
             app:fabCradleRoundedCornerRadius="10dp"
             app:fabCradleVerticalOffset="1dp"
+            app:hideOnScroll="true"
             app:layout_anchorGravity="center">
 
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/bottomNavView"
+                android:layout_marginBottom="0dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -118,17 +121,6 @@
 
             </com.google.android.material.bottomnavigation.BottomNavigationView>
         </com.google.android.material.bottomappbar.BottomAppBar>
-<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--            android:id="@+id/fab"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:backgroundTint="@color/teal_200"-->
-<!--            android:src="@drawable/add_icon"-->
-<!--            app:layout_anchor="@id/bottomAppBar"-->
-<!--            android:contentDescription="New Transaction">-->
-
-<!--        </com.google.android.material.floatingactionbutton.FloatingActionButton>-->
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </LinearLayout>
