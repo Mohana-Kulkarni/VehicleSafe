@@ -57,7 +57,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/dnd_icon">
+            android:src="@drawable/baseline_electric_bike_24">
 
         </ImageView>
     </androidx.cardview.widget.CardView>
