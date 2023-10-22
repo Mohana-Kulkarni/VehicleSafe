@@ -11,6 +11,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VehicleSafe"
         tools:targetApi="31">
+        <activity android:name=".Activity_Contacts"
+            android:exported="false" />
+        <activity android:name=".Activity_Signup"
+            android:exported="false" />
+        <activity android:name=".Activity_CallLogs"
+            android:exported="false" />
+        <activity android:name=".Activity_HomePage"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

@@ -7,7 +7,7 @@
 
 
     <item
-        android:id="@+id/navidation_logs"
+        android:id="@+id/navigation_logs"
         android:icon="@drawable/call_icon"
         android:title="Logs" />
 
