@@ -1,26 +1,45 @@
 package com.example.vehiclesafe;
 
+import android.Manifest;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.provider.Settings;
-import android.widget.ImageButton;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.vehiclesafe.adapter.CallLogAdapter;
 import com.example.vehiclesafe.databinding.ActivityHomePageBinding;
+import com.example.vehiclesafe.model.CallLogModel;
+
+import java.util.List;
 
 public class Activity_HomePage extends AppCompatActivity {
 
     ActivityHomePageBinding binding;
+
+    RecyclerView recyclerView;
+
+    private List<CallLogModel> callLogList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         binding = ActivityHomePageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        recyclerView = findViewById(R.id.itemsRecycler);
+
 
         // Find the ImageButton by its ID
         ImageButton electricBikeButton = findViewById(R.id.electricBikeButton);
@@ -39,11 +58,12 @@ public class Activity_HomePage extends AppCompatActivity {
         electricBikeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Display a toast message when the ImageButton is clicked
+                // Display a toas524+65+/11528t message when the ImageButton is clicked
                 enableDoNotDisturbMode();
                 Toast.makeText(Activity_HomePage.this, "ImageButton Clicked", Toast.LENGTH_SHORT).show();
             }
         });
+
         binding.bottomNavView.setBackground(null);
 
         binding.bottomNavView.setOnItemSelectedListener(item->{
@@ -110,4 +130,37 @@ public class Activity_HomePage extends AppCompatActivity {
             Toast.makeText(this, "Unable to open notification policy settings.", Toast.LENGTH_SHORT).show();
         }
     }
+
+    private boolean checkPermissions() {
+        int readCallLogPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CALL_LOG);
+        return readCallLogPermission == PackageManager.PERMISSION_GRANTED;
+    }
+
+    private void requestPermissions() {
+        ActivityCompat.requestPermissions(this, new String[] { Manifest.permission.READ_CALL_LOG}, 1);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                // Permissions were granted
+                accessCallLog();
+            } else {
+                // Permissions were denied
+                // Handle the case where the user denied the permissions
+            }
+        }
+    }
+
+    private void accessCallLog() {
+        callLogList = CallLogReader.readCallLog(this);
+
+        CallLogAdapter adapter = new CallLogAdapter(callLogList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
+
+    }
+
 }
